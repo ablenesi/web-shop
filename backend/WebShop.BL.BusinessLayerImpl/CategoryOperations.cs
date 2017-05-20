@@ -9,7 +9,7 @@ using WebShop.DL.DataLayerContract.Entities;
 
 namespace WebShop.BL.BusinessLayerImpl
 {
-    class CategoryOperations : ICategoryOperastions
+    public class CategoryOperations : ICategoryOperastions
     {
         private IDataAccess<Category> _categoryDataAccess;
 
