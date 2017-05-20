@@ -22,13 +22,20 @@ namespace WebShop.BL.BusinessLayerImpl
 
         public void Create(OrderDTO order)
         {
-            _orderDataAccess.Add(new Order
+            var dataOrder = new Order
             {
                 Name = order.Name,
                 Address = order.Address,
-                Date = order.Date,
-                OrderDetails = order.OrderDetails.Select(x => Create(x)).ToArray()
-            });
+                Date = order.Date
+            };
+            _orderDataAccess.Add(dataOrder);
+
+            foreach(var orderDetail in order.OrderDetails)
+            {
+                orderDetail.OrderId = dataOrder.Id;
+                Create(orderDetail);
+            }
+            
         }
 
         public IEnumerable<OrderDTO> Get()
