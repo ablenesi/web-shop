@@ -43,7 +43,7 @@
     <Compile Include="DTOs\OrderDTO.cs" />
     <Compile Include="DTOs\OrderDetailDTO.cs" />
     <Compile Include="DTOs\ProductDTO.cs" />
-    <Compile Include="ICategoryOperastions.cs" />
+    <Compile Include="ICategoryOperations.cs" />
     <Compile Include="IOrderOperations.cs" />
     <Compile Include="IProductOperations.cs" />
     <Compile Include="IUnitOfWork.cs" />

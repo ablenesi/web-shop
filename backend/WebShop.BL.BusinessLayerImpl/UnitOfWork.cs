@@ -9,6 +9,8 @@ namespace WebShop.BL.BusinessLayerImpl
     {
         private IRepository _repository;
         private IProductOperations _productOperations;
+        private ICategoryOperations _categoryOperations;
+        private IOrderOperations _orderOperations;
 
         public UnitOfWork(IRepository repository)
         {
@@ -27,6 +29,35 @@ namespace WebShop.BL.BusinessLayerImpl
                 }
 
                 return _productOperations;
+            }
+        }
+
+        public ICategoryOperations CategoryOperations
+        {
+            get
+            {
+                if (_categoryOperations == null)
+                {
+                    _categoryOperations = new CategoryOperations(
+                        _repository.CategoryRepository);
+                }
+
+                return _categoryOperations;
+            }
+        }
+
+        public IOrderOperations OrderOperations
+        {
+            get
+            {
+                if (_orderOperations == null)
+                {
+                    _orderOperations = new OrderOperations(
+                        _repository.OrderRepository,
+                        _repository.OrderDetailRepository);
+                }
+
+                return _orderOperations;
             }
         }
 
