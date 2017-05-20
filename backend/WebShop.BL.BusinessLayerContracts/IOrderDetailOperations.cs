@@ -4,7 +4,7 @@ using WebShop.BL.BusinessLayerContracts.DTOs;
 
 namespace WebShop.BL.BusinessLayerContracts
 {
-    interface IOrderDetailOperations
+    public interface IOrderDetailOperations
     {
         void Create(OrderDetailsDTO orderDetail);
         OrderDetailsDTO Get(int orderDetailId);

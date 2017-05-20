@@ -2,7 +2,7 @@
 
 namespace WebShop.BL.BusinessLayerContracts.DTOs
 {
-    class OrderDTO
+    public class OrderDTO
         {
             public int Id { get; set; }
             public string Name { get; set; }

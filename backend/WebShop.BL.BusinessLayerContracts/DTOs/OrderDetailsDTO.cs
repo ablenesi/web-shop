@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebShop.BL.BusinessLayerContracts.DTOs
 {
-    class OrderDetailsDTO
+    public class OrderDetailsDTO
     {
         public int ProductId { get; set; }
         public int OrderId { get; set; }

@@ -4,7 +4,7 @@ using WebShop.BL.BusinessLayerContracts.DTOs;
 
 namespace WebShop.BL.BusinessLayerContracts
 {
-    interface ICategoryOperastions
+    public interface ICategoryOperastions
     {
         void Create(CategoryDTO category);
         IEnumerable<CategoryDTO> Get();
