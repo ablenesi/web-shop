@@ -1,11 +1,11 @@
-language: android
-android:
-  components:
-    - tools
-    - build-tools-25.0.2
-    - android-25
-jdk:
-  - oraclejdk8
-
-before_script:
+language: android
+android:
+  components:
+    - tools
+    - build-tools-25.0.2
+    - android-25
+jdk:
+  - oraclejdk8
+script: ./gradlew build
+before_script:
   - cd client/WebShop
