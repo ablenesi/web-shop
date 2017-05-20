@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WebShop.BL.BusinessLayerContracts.DTOs
+﻿namespace WebShop.BL.BusinessLayerContracts.DTOs
 {
     public class CategoryDTO
     {
