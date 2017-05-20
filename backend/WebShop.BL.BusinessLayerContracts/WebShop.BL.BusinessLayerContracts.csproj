@@ -39,7 +39,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTOs\CategoryDTO.cs" />
+    <Compile Include="DTOs\OrderDTO.cs" />
+    <Compile Include="DTOs\OrderDetailsDTO.cs" />
     <Compile Include="DTOs\ProductDTO.cs" />
+    <Compile Include="ICategoryOperastions.cs" />
+    <Compile Include="IOrderDetailOperations.cs" />
+    <Compile Include="IOrderOperations.cs" />
     <Compile Include="IProductOperations.cs" />
     <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
