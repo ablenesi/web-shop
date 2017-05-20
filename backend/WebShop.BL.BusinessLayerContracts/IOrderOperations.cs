@@ -6,7 +6,7 @@ namespace WebShop.BL.BusinessLayerContracts
 {
     public interface IOrderOperations
     {
-        void Create(OrderDTO order, ICollection<OrderDetailsDTO> orderDetails);
+        void Create(OrderDTO order);
         IEnumerable<OrderDTO> Get();
     }
 }
