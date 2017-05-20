@@ -85,17 +85,17 @@ namespace WebShop.BL.BusinessLayerImpl.Tests
         public void Create_NewProductUsingUnitOfWorkAndIoC_SaveChangesIntoDB()
         {
             // Arrange
-            Category category1 = null;
+            Category category = null;
             var productName = string.Format("Test Product - {0}", DateTime.Now.Ticks);
             var price = 10;
             using (var ctx = new WebShopContext())
             {
-                category1 = ctx.Categories.First(x => x.Name == "Category1");
+                category = ctx.Categories.First(x => x.Name == "Category1");
             }
 
             var product = new ProductDTO()
             {
-                CategoryId = category1.Id,
+                CategoryId = category.Id,
                 Name = productName,
                 Price = price
             };
