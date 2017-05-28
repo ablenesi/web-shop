@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        icon="@drawable/ic_shopping_cart"
+        id="@+id/tab_products"
+        title="@string/products" />
+    <tab
+        icon="@drawable/ic_receipt"
+        id="@+id/tab_orders"
+        title="@string/orders" />
+    <tab
+        icon="@drawable/ic_settings"
+        id="@+id/tab_settings"
+        title="@string/settings" />
+</tabs>

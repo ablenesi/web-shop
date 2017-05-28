@@ -6,6 +6,4 @@ import android.arch.lifecycle.ViewModel
  * Purpose
  * <p>
  */
-class HomeViewModel : ViewModel(){
-
-}
+class HomeViewModel : ViewModel()

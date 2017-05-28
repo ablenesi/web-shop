@@ -1,11 +1,12 @@
 package edu.bbu.webshop.feature
 
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import edu.bbu.webshop.HomeBinding
+import com.roughike.bottombar.BottomBar
 import edu.bbu.webshop.R
+import edu.bbu.webshop.feature.order.OrdersFragment
+import edu.bbu.webshop.feature.product.ProductsFragment
+import edu.bbu.webshop.feature.settings.SettingsFragment
 
 /**
  * Purpose
@@ -14,14 +15,25 @@ import edu.bbu.webshop.R
 
 class HomeActivity : AppCompatActivity() {
 
-    private lateinit var binding: HomeBinding
-
-    private lateinit var viewModel: HomeViewModel
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
+        setContentView(R.layout.activity_home)
 
-        viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
+        val orders = OrdersFragment()
+        val products = ProductsFragment()
+        val settings = SettingsFragment()
+
+        findViewById<BottomBar>(R.id.bottom_navigation).setOnTabSelectListener {
+            supportFragmentManager.beginTransaction()
+                    .replace(R.id.container, when (it) {
+                        R.id.tab_orders -> orders
+                        R.id.tab_products -> products
+                        R.id.tab_settings -> settings
+                        else -> null
+                    })
+                    .commit()
+        }
+
     }
+
 }
