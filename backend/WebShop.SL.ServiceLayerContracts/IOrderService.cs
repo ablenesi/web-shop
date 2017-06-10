@@ -9,7 +9,7 @@ namespace WebShop.SL.ServiceLayerContracts
     public interface IOrderService
     {
         [OperationContract]
-        void Create(OrderDTO product);
+        void Create(OrderDTO orderDTO);
 
         IEnumerable<OrderDTO> GetAll();
     }

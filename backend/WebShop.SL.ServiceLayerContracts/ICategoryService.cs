@@ -7,7 +7,13 @@ namespace WebShop.SL.ServiceLayerContracts
     [ServiceContract]
     public interface ICategoryService
     {
+
+        [OperationContract]
+        void Create(CategoryDTO categoryDTO);
+
         [OperationContract]
         IEnumerable<CategoryDTO> GetAll();
+       
     }
+
 }

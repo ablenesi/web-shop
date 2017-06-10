@@ -7,7 +7,7 @@ using WebShop.SL.ServiceLayerContracts;
 
 namespace WebShop.SL.Client
 {
-    class OrderClient : ClientBase<IOrderService>, IOrderService
+    public class OrderClient : ClientBase<IOrderService>, IOrderService
     {
         public void Create(OrderDTO order)
         {

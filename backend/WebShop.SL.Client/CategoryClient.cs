@@ -5,11 +5,16 @@ using System.ServiceModel;
 
 namespace WebShop.SL.Client
 {
-    class CategoryClient : ClientBase<ICategoryService>, ICategoryService
+    public class CategoryClient : ClientBase<ICategoryService>, ICategoryService
     {
         public IEnumerable<CategoryDTO> GetAll()
         {
             return Channel.GetAll();
+        }
+
+        public void Create(CategoryDTO categoryDTO)
+        {
+            Channel.Create(categoryDTO);
         }
     }
 }

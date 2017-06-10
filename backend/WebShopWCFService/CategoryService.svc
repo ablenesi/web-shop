@@ -1,0 +1,3 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" 
+    Service="WebShop.SL.ServiceLayerImpl.CategoryService" 
+    Factory="WebShopWCFService.DI.StructureMapServiceHostFactory" %>

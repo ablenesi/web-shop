@@ -14,6 +14,12 @@ namespace WebShop.SL.ServiceLayerImpl
         {
             _uow = uow;
         }
+
+        public void Create(CategoryDTO categoryDTO)
+        {
+            _uow.CategoryOperations.Create(categoryDTO);
+        }
+
         public IEnumerable<CategoryDTO> GetAll()
         {
             return _uow.CategoryOperations.Get();
