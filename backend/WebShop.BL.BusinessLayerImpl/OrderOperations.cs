@@ -40,19 +40,31 @@ namespace WebShop.BL.BusinessLayerImpl
 
         public IEnumerable<OrderDTO> Get()
         {
-            return _orderDataAccess.Read()
+          //Get the order list
+            var ordersDTO = _orderDataAccess.Read()
                 .Select(x => new OrderDTO {
                     Id = x.Id,
                     Name = x.Name,
                     Address = x.Address,
                     Date = x.Date,
-                    OrderDetails = x.OrderDetails.Select(orderDetail => new OrderDetailDTO()
+                }).ToList();
+
+            foreach (var orderDTO in ordersDTO)
+            {
+                // Get the order datails for each order
+                var OrderDetailsDTO = _orderDetailDataAccess.Read()
+                    .Select(x => new OrderDetailDTO
                     {
-                        ProductId = orderDetail.ProductId,
-                        OrderId = orderDetail.OrderId,
-                        Quantity = orderDetail.Quantity
-                    }).ToArray()
-                });
+                        OrderId = x.OrderId,
+                        ProductId = x.ProductId,
+                        Quantity = x.Quantity
+                    })
+                    .Where(o => o.OrderId == orderDTO.Id)
+                    .ToList();
+
+                orderDTO.OrderDetails = OrderDetailsDTO;
+            }
+            return ordersDTO;
         }
 
         #region OrederDetail
