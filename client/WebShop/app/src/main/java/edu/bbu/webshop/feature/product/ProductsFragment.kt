@@ -7,10 +7,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import edu.bbu.webshop.R
+import android.support.design.widget.TabLayout
+import android.support.v4.view.ViewPager
 
-class ProductsFragment : Fragment(){
+
+class ProductsFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater?.inflate(R.layout.fragment_product, container, false)
+        val view = inflater?.inflate(R.layout.fragment_products, container, false)
+
+        val viewPager = view?.findViewById<ViewPager>(R.id.view_pager)
+        viewPager?.adapter = ProductPagerAdapter(fragmentManager)
+
+        val tabLayout = view?.findViewById<TabLayout>(R.id.sliding_tabs)
+        tabLayout?.setupWithViewPager(viewPager)
+
+        return view
     }
 }

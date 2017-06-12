@@ -1,9 +1,9 @@
 package edu.bbu.webshop.api
 
 import android.arch.lifecycle.LiveData
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
-import java.util.*
 
 /**
  * REST API access points
@@ -14,7 +14,7 @@ interface WebShopService {
     fun getProducts(): LiveData<ApiResponse<List<Product>>>
 
     @GET("category")
-    fun getCategories(): LiveData<ApiResponse<List<Category>>>
+    fun getCategories(): Call<List<Category>>
 
     @GET("order")
     fun getOrders(): LiveData<ApiResponse<List<Orders>>>
@@ -50,7 +50,7 @@ class ApiResponse<T> {
 
     constructor(response: Response<T>?) {
         if (response != null && response.isSuccessful) {
-            code = response.code() as Int
+            code = response.code()
             body = response.body()
         } else {
             TODO("Handle error cases")
