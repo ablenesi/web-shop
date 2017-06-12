@@ -1,4 +1,5 @@
-﻿using System.ServiceModel;
+﻿using System.Collections.Generic;
+using System.ServiceModel;
 
 using WebShop.BL.BusinessLayerContracts.DTOs;
 
@@ -8,6 +9,9 @@ namespace WebShop.SL.ServiceLayerContracts
     public interface IProductService
     {
         [OperationContract]
-        void Create(ProductDTO product);
+        void Create(ProductDTO productDTO);
+
+        [OperationContract]
+        IEnumerable<ProductDTO> GetAll();
     }
 }

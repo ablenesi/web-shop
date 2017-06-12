@@ -1,4 +1,6 @@
-﻿using WebShop.BL.BusinessLayerContracts;
+﻿using System;
+using System.Collections.Generic;
+using WebShop.BL.BusinessLayerContracts;
 using WebShop.BL.BusinessLayerContracts.DTOs;
 using WebShop.SL.ServiceLayerContracts;
 
@@ -13,10 +15,14 @@ namespace WebShop.SL.ServiceLayerImpl
             _uow = uow;
         }
 
-        public void Create(ProductDTO product)
+        public void Create(ProductDTO productDTO)
         {
-            _uow.ProductOperations.Create(product);
-            _uow.SaveChanges();
+            _uow.ProductOperations.Create(productDTO);
+        }
+
+        public IEnumerable<ProductDTO> GetAll()
+        {
+            return _uow.ProductOperations.Get();
         }
     }
 }
