@@ -9,5 +9,7 @@
     <!--Settings-->
     <string name="server_ip">Server IP</string>
     <string name="port">PORT</string>
+    <string name="save_action">Save</string>
+    <string name="save_button">Save</string>
 
 </resources>
