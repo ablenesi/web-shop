@@ -2,6 +2,7 @@ package edu.bbu.webshop.di
 
 import dagger.Component
 import edu.bbu.webshop.feature.product.ProductPagerAdapter
+import edu.bbu.webshop.feature.settings.SettingsFragment
 import javax.inject.Singleton
 
 @Singleton
@@ -9,4 +10,5 @@ import javax.inject.Singleton
 interface AppComponent {
 
     fun inject(adapter: ProductPagerAdapter)
+    fun inject(settingsFragment: SettingsFragment)
 }

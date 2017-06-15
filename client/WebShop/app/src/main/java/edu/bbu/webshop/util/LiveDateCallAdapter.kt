@@ -11,12 +11,12 @@ class LiveDateCallAdapterFactory : CallAdapter.Factory() {
 
     override fun get(returnType: Type?, annotations: Array<out Annotation>?, retrofit: Retrofit?): CallAdapter<*, *>? {
         if (getRawType(returnType) != LiveData::class.java) {
-            return null;
+            return null
         }
 
         val observableType = getParameterUpperBound(0, returnType as ParameterizedType)
         if (getRawType(observableType) != ApiResponse::class.java) {
-            return null;
+            return null
         }
 
         val bodyType = getParameterUpperBound(0, observableType as ParameterizedType)
@@ -28,10 +28,10 @@ class LiveDateCallAdapterFactory : CallAdapter.Factory() {
 /**
  * Adapter to converts [Call][retrofit2.Call] to [LiveData]<[ApiResponse]>.
  */
-class LiveDataCallAdapter<R>(val resopnseType: Type) : CallAdapter<R, LiveData<ApiResponse<R>>> {
+class LiveDataCallAdapter<R>(val responseType: Type) : CallAdapter<R, LiveData<ApiResponse<R>>> {
 
     override fun responseType(): Type {
-        return resopnseType
+        return responseType
     }
 
     override fun adapt(call: Call<R>?) = object : LiveData<ApiResponse<R>>() {

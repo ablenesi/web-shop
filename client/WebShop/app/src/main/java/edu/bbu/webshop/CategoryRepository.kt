@@ -20,7 +20,7 @@ class CategoryRepository @Inject constructor(val api: WebShopService) {
 
                 override fun onResponse(call: Call<List<Category>>?, response: Response<List<Category>>?) {
                     Timber.i("Categories loaded from API:", response?.body())
-                    response?.body()?.forEach() { category -> categories[category.id] = category }
+                    response?.body()?.forEach { category -> categories[category.id] = category }
                 }
 
             })
