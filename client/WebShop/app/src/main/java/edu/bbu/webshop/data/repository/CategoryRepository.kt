@@ -1,4 +1,4 @@
-package edu.bbu.webshop
+package edu.bbu.webshop.data.repository
 
 import edu.bbu.webshop.api.Category
 import edu.bbu.webshop.api.WebShopService
@@ -13,7 +13,7 @@ class CategoryRepository @Inject constructor(val api: WebShopService) {
 
     private val categories: MutableMap<Int, Category> = HashMap()
 
-    fun getCategories(): MutableCollection<Category> {
+    fun getCategories(changeListener: ChangeListener<MutableCollection<Category>>) {
         if (categories.isEmpty()) {
             api.getCategories().enqueue(object : retrofit2.Callback<List<Category>> {
                 override fun onFailure(call: Call<List<Category>>?, t: Throwable?) {
@@ -22,13 +22,14 @@ class CategoryRepository @Inject constructor(val api: WebShopService) {
 
                 override fun onResponse(call: Call<List<Category>>?, response: Response<List<Category>>?) {
                     Timber.i("Categories loaded from API:", response?.body())
-                    Timber.i(response?.body()?.get(0)?.name)
                     response?.body()?.forEach { category -> categories[category.id] = category }
+                    changeListener.onChange(categories.values)
                 }
 
             })
+        } else {
+            changeListener.onChange(categories.values)
         }
-        return categories.values
     }
 
 }

@@ -1,6 +1,5 @@
 package edu.bbu.webshop.api
 
-import android.arch.lifecycle.LiveData
 import com.google.gson.annotations.SerializedName
 import retrofit2.Call
 import retrofit2.Response
@@ -12,29 +11,33 @@ import retrofit2.http.GET
 interface WebShopService {
 
     @GET("product")
-    fun getProducts(): LiveData<ApiResponse<List<Product>>>
+    fun getProducts(): Call<List<Product>>
 
     @GET("category")
     fun getCategories(): Call<List<Category>>
 
     @GET("order")
-    fun getOrders(): LiveData<ApiResponse<List<Orders>>>
+    fun getOrders(): Call<List<Orders>>
 
 }
 
-data class Category(@SerializedName("Id") val id: Int,@SerializedName("Name") val name: String)
+data class Category(@SerializedName("Id") val id: Int,
+                    @SerializedName("Name") val name: String)
 
-data class Product(val id: Int,
-                   val name: String,
-                   val price: Double)
+data class Product(@SerializedName("Id") val id: Int,
+                   @SerializedName("Name") val name: String,
+                   @SerializedName("Price") val price: Double,
+                   @SerializedName("CategoryId") val categoryId: Int)
 
-data class Orders(val id: Int,
-                  val name: String,
-                  val address: String,
-                  val date: Long,
-                  val orderDetails: List<OrderDetail>)
+data class Orders(@SerializedName("Id") val id: Int,
+                  @SerializedName("Name") val name: String,
+                  @SerializedName("Address") val address: String,
+                  @SerializedName("Date") val date: String,
+                  @SerializedName("OrderDetails") val orderDetails: List<OrderDetail>)
 
-data class OrderDetail(val product: Product, val count: Int)
+data class OrderDetail(@SerializedName("ProductId") val productId: Int,
+                       @SerializedName("OrderId") val orderId: Int,
+                       @SerializedName("Quantity") val quantity: Int)
 
 /**
  * Request response representation
