@@ -21,9 +21,6 @@ android {
         }
     }
 
-    dataBinding {
-        enabled = true
-    }
     lintOptions {
         abortOnError false
     }
@@ -51,8 +48,7 @@ dependencies {
 
     // Dev tools : Kotlin, Android Architecture components, databinding
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jre7:' + kotlinVersion
-    implementation 'android.arch.lifecycle:extensions:1.0.0-alpha2'
-    kapt 'com.android.databinding:compiler:2.3.2'
+    implementation 'android.arch.lifecycle:extensions:1.0.0-alpha3'
     implementation 'com.jakewharton.timber:timber:' + timberVersion
 
     // Android support library
@@ -69,4 +65,7 @@ dependencies {
     // Dependency Injection
     compile 'com.google.dagger:dagger:' + daggerVersion
     compile 'com.google.dagger:dagger-android:' + daggerVersion
+    compile 'com.google.dagger:dagger-android-support:' + daggerVersion
+
+    kapt 'com.google.dagger:dagger-compiler:' + daggerVersion
 }

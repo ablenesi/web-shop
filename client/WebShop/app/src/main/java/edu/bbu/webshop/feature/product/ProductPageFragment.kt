@@ -1,7 +1,7 @@
 package edu.bbu.webshop.feature.product
 
-import android.support.v4.app.Fragment
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +17,7 @@ class ProductPageFragment : Fragment() {
             val args = Bundle()
             args.putInt(ARG_PAGE, page)
             val fragment = ProductPageFragment()
-            fragment.setArguments(args)
+            fragment.arguments = args
             return fragment
         }
     }

@@ -3,13 +3,12 @@ package edu.bbu.webshop.util
 import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
-import com.google.gson.Gson
 import javax.inject.Inject
 import javax.inject.Singleton
 
 
 @Singleton
-class SharedPreferenceManager @Inject constructor(context: Context,private val gson : Gson) {
+class SharedPreferenceManager @Inject constructor(context: Context) {
 
     companion object{
         val SERVER_IP_KEY : String = "server_ip"

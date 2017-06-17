@@ -1,6 +1,7 @@
 package edu.bbu.webshop.feature.settings
 
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.design.widget.TextInputEditText
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import edu.bbu.webshop.R
+import edu.bbu.webshop.WebShopApp
 import edu.bbu.webshop.util.SharedPreferenceManager
 import javax.inject.Inject
 
@@ -17,7 +19,7 @@ class SettingsFragment : Fragment() {
     lateinit var sharedPreferenceManager : SharedPreferenceManager
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        //inject the shared pref manager
+        WebShopApp.appComponent.inject(this)
         return inflater?.inflate(R.layout.fragment_settings, container, false)
     }
 
