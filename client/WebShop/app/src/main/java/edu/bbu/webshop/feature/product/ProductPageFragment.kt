@@ -2,10 +2,12 @@ package edu.bbu.webshop.feature.product
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import edu.bbu.webshop.R
 import edu.bbu.webshop.WebShopApp
 import edu.bbu.webshop.api.Product
@@ -31,7 +33,6 @@ class ProductPageFragment : Fragment() {
 
     @Inject
     lateinit var productRepo : ProductRepository
-    private var products: MutableCollection<Product> = mutableListOf()
 
     val page by lazy {
         arguments.getInt(ARG_PAGE)
@@ -40,24 +41,25 @@ class ProductPageFragment : Fragment() {
         arguments.getInt(ARG_CATEGORY_ID)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         WebShopApp.appComponent.inject(this)
-        super.onCreate(savedInstanceState)
+        val view = inflater?.inflate(R.layout.fragment_product, container, false)
+        return view
+    }
+
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        val recyclerView : RecyclerView? = view?.findViewById<RecyclerView>(R.id.product_recycler_view)
+        recyclerView?.addItemDecoration(DividerItemDecoration(view.context, LinearLayoutManager.VERTICAL))
         productRepo.getProducts(object : ChangeListener<MutableCollection<Product>>{
             override fun onChange(var1: MutableCollection<Product>) {
-                products = var1.filter { it.categoryId == categoryID }.toMutableList()
+                recyclerView?.adapter = ProductListAdapter(var1.filter { it.categoryId == categoryID }.toMutableList())
             }
 
             override fun onError(var1: Exception) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                TODO("not implemented")
             }
-
         })
-    }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater?.inflate(R.layout.fragment_product, container, false)
-        view?.findViewById<TextView>(R.id.page_text)?.text = "Fragment ${page}"
-        return view
+        super.onViewCreated(view, savedInstanceState)
     }
 }
