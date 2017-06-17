@@ -1,6 +1,7 @@
 package edu.bbu.webshop.api
 
 import android.arch.lifecycle.LiveData
+import com.google.gson.annotations.SerializedName
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
@@ -21,8 +22,7 @@ interface WebShopService {
 
 }
 
-data class Category(val id: Int,
-                    val name: String)
+data class Category(@SerializedName("Id") val id: Int,@SerializedName("Name") val name: String)
 
 data class Product(val id: Int,
                    val name: String,
@@ -56,6 +56,5 @@ class ApiResponse<T> {
             TODO("Handle error cases")
         }
     }
-
 }
 

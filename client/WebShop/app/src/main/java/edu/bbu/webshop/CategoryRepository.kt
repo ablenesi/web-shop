@@ -6,7 +6,9 @@ import retrofit2.Call
 import retrofit2.Response
 import timber.log.Timber
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class CategoryRepository @Inject constructor(val api: WebShopService) {
 
     private val categories: MutableMap<Int, Category> = HashMap()
@@ -20,6 +22,7 @@ class CategoryRepository @Inject constructor(val api: WebShopService) {
 
                 override fun onResponse(call: Call<List<Category>>?, response: Response<List<Category>>?) {
                     Timber.i("Categories loaded from API:", response?.body())
+                    Timber.i(response?.body()?.get(0)?.name)
                     response?.body()?.forEach { category -> categories[category.id] = category }
                 }
 

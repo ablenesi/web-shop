@@ -2,6 +2,7 @@ package edu.bbu.webshop
 
 import android.app.Application
 import edu.bbu.webshop.di.AppComponent
+import edu.bbu.webshop.di.AppModule
 import edu.bbu.webshop.di.DaggerAppComponent
 import timber.log.Timber
 
@@ -16,9 +17,8 @@ class WebShopApp : Application() {
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
-
         appComponent = DaggerAppComponent.builder()
-                .application(this)
+                .appModule(AppModule(this))
                 .build()
     }
 }

@@ -1,10 +1,9 @@
 package edu.bbu.webshop.di
 
+import android.app.Application
 import android.content.Context
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
-import edu.bbu.webshop.WebShopApp
 import edu.bbu.webshop.api.WebShopService
 import edu.bbu.webshop.util.SharedPreferenceManager
 import retrofit2.Retrofit
@@ -13,22 +12,24 @@ import javax.inject.Singleton
 
 
 @Module
-abstract class AppModule {
+class AppModule(private val app:Application) {
 
-    @Singleton
-    @Binds
-    abstract fun provideContext(application: WebShopApp): Context
+    @Singleton @Provides
+    fun provideContext(): Context = app.applicationContext
 
-    @Module
-    companion object {
-        @Singleton @Provides
-        fun provideWebShopService(sharePref: SharedPreferenceManager): WebShopService? {
-            val port: String = sharePref.getString(SharedPreferenceManager.SERVER_PORT_KEY)
-            val ip: String = sharePref.getString(SharedPreferenceManager.SERVER_IP_KEY)
-            return Retrofit.Builder()
-                    .baseUrl("http://$ip:$port/WebShopWebAPI/api/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build().create(WebShopService::class.java)
-        }
+    @Singleton @Provides
+    fun provideWebShopService(sharePref: SharedPreferenceManager): WebShopService {
+        val ip: String = "192.168.1.122"
+        val port: String = "80"
+
+
+//        val ip: String = sharePref.getString(SharedPreferenceManager.SERVER_IP_KEY)
+//        val port: String = sharePref.getString(SharedPreferenceManager.SERVER_PORT_KEY)
+
+        return Retrofit.Builder()
+                .baseUrl("http://$ip:$port/webshopwebapi/api/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build().create(WebShopService::class.java)
     }
+
 }
