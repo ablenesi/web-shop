@@ -28,7 +28,7 @@ class ProductPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
         })
     }
 
-    override fun getItem(position: Int) = ProductPageFragment.newInstance(position,categories.elementAt(position).id)
+    override fun getItem(position: Int) = ProductPageFragment.newInstance(categories.elementAt(position).id)
 
     override fun getCount() = categories.size
 

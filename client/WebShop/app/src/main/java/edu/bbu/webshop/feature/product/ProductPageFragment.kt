@@ -2,6 +2,7 @@ package edu.bbu.webshop.feature.product
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.CardView
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -18,12 +19,10 @@ import javax.inject.Inject
 class ProductPageFragment : Fragment() {
 
     companion object {
-        val ARG_PAGE = "ARG_PAGE"
         val ARG_CATEGORY_ID = "ARG_CATEGORY_ID"
 
-        fun newInstance(page: Int, categoryId: Int): ProductPageFragment {
+        fun newInstance(categoryId: Int): ProductPageFragment {
             val args = Bundle()
-            args.putInt(ARG_PAGE, page)
             args.putInt(ARG_CATEGORY_ID, categoryId)
             val fragment = ProductPageFragment()
             fragment.arguments = args
@@ -33,10 +32,8 @@ class ProductPageFragment : Fragment() {
 
     @Inject
     lateinit var productRepo : ProductRepository
+    val sum: Int = 0
 
-    val page by lazy {
-        arguments.getInt(ARG_PAGE)
-    }
     val categoryID by lazy {
         arguments.getInt(ARG_CATEGORY_ID)
     }
@@ -50,9 +47,20 @@ class ProductPageFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         val recyclerView : RecyclerView? = view?.findViewById<RecyclerView>(R.id.product_recycler_view)
         recyclerView?.addItemDecoration(DividerItemDecoration(view.context, LinearLayoutManager.VERTICAL))
+        val cardview : CardView? = view?.findViewById(R.id.check_out_card)
         productRepo.getProducts(object : ChangeListener<MutableCollection<Product>>{
             override fun onChange(var1: MutableCollection<Product>) {
-                recyclerView?.adapter = ProductListAdapter(var1.filter { it.categoryId == categoryID }.toMutableList())
+                recyclerView?.adapter = ProductListAdapter(
+                        var1.filter { it.categoryId == categoryID }.toMutableList(),
+                        object : ProductListAdapter.Callback{
+                            override fun addProduct(product: Product) {
+
+                            }
+
+                            override fun removeProduct(product: Product) {
+
+                            }
+                        })
             }
 
             override fun onError(var1: Exception) {
