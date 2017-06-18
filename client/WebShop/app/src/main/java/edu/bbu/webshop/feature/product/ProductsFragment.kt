@@ -6,7 +6,6 @@ import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
 import android.support.v7.widget.CardView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -90,7 +89,6 @@ class ProductsFragment : Fragment() {
     }
 
     fun addProduct(product: Product) {
-        Log.i("Glog", "sent")
         cardview?.visibility = View.VISIBLE
         orderedProduct.add(product)
         updatePrice()

@@ -1,7 +1,6 @@
 package edu.bbu.webshop.feature.settings
 
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.design.widget.TextInputEditText
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -25,12 +24,10 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val ip : String = view?.findViewById<TextInputEditText>(R.id.server_ip)?.text.toString()
-        val port : String = view?.findViewById<TextInputEditText>(R.id.server_port)?.text.toString()
         val button : Button? = view?.findViewById<Button>(R.id.save_button)
         button?.setOnClickListener {
-            sharedPreferenceManager.putString(SharedPreferenceManager.SERVER_IP_KEY,ip)
-            sharedPreferenceManager.putString(SharedPreferenceManager.SERVER_PORT_KEY,port)
+            sharedPreferenceManager.putString(SharedPreferenceManager.SERVER_IP_KEY, view.findViewById<TextInputEditText>(R.id.server_ip)?.text.toString())
+            sharedPreferenceManager.putString(SharedPreferenceManager.SERVER_PORT_KEY,view.findViewById<TextInputEditText>(R.id.server_port)?.text.toString())
         }
     }
 }

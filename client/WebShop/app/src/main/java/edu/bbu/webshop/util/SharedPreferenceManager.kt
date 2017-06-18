@@ -17,8 +17,28 @@ class SharedPreferenceManager @Inject constructor(context: Context) {
 
     private var preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
-    fun getString(key: String): String = preferences.getString(key, null)
+    fun getPort() : String{
+        return if (getString(SERVER_PORT_KEY) != "") {
+            getString(SERVER_PORT_KEY)
+        } else {
+            "80"
+        }
+    }
 
-    fun putString(key: String, value: String) = preferences.edit().putString(key, value).apply()
+    fun getIP() : String{
+        return if (getString(SERVER_IP_KEY) != "") {
+            getString(SERVER_IP_KEY)
+        } else {
+            "192.168.43.190"
+        }
+    }
+
+    private fun getString(key: String): String {
+        return preferences.getString(key, "")
+    }
+
+    fun putString(key: String, value: String) {
+        preferences.edit().putString(key, value).apply()
+    }
 
 }

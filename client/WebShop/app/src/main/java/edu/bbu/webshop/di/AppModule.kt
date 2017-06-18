@@ -32,15 +32,8 @@ class AppModule(private val app:Application) {
 
     @Singleton @Provides
     fun provideWebShopService(okHttpClient : OkHttpClient,sharePref: SharedPreferenceManager): WebShopService {
-        val ip: String = "192.168.43.190"
-        val port: String = "80"
-
-
-//        val ip: String = sharePref.getString(SharedPreferenceManager.SERVER_IP_KEY)
-//        val port: String = sharePref.getString(SharedPreferenceManager.SERVER_PORT_KEY)
-
         return Retrofit.Builder()
-                .baseUrl("http://$ip:$port/webshopwebapi/api/")
+                .baseUrl("http://${sharePref.getIP()}:${sharePref.getPort()}/webshopwebapi/api/")
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build().create(WebShopService::class.java)
