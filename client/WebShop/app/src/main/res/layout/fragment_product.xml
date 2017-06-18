@@ -22,9 +22,10 @@
         android:layout_alignParentBottom="true">
 
         <TextView
+            android:id="@+id/sum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="36sp"
+            android:textSize="24sp"
             tools:text="Sum : 45$"/>
 
         <Button
