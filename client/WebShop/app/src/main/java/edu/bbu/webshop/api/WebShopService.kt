@@ -3,7 +3,9 @@ package edu.bbu.webshop.api
 import com.google.gson.annotations.SerializedName
 import retrofit2.Call
 import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 
 /**
  * REST API access points
@@ -19,6 +21,9 @@ interface WebShopService {
     @GET("order")
     fun getOrders(): Call<List<Orders>>
 
+    @POST("order")
+    fun addOrder(@Body order : Orders) : Call<Unit>
+
 }
 
 data class Category(@SerializedName("Id") val id: Int,
@@ -29,14 +34,14 @@ data class Product(@SerializedName("Id") val id: Int,
                    @SerializedName("Price") val price: Double,
                    @SerializedName("CategoryId") val categoryId: Int)
 
-data class Orders(@SerializedName("Id") val id: Int,
+data class Orders(@SerializedName("Id") val id: Int? = null,
                   @SerializedName("Name") val name: String,
                   @SerializedName("Address") val address: String,
                   @SerializedName("Date") val date: String,
-                  @SerializedName("OrderDetails") val orderDetails: List<OrderDetail>)
+                  @SerializedName("OrderDetails") val orderDetails: MutableCollection<OrderDetail>)
 
 data class OrderDetail(@SerializedName("ProductId") val productId: Int,
-                       @SerializedName("OrderId") val orderId: Int,
+                       @SerializedName("OrderId") val orderId: Int? = null,
                        @SerializedName("Quantity") val quantity: Int)
 
 /**
