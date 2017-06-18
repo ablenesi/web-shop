@@ -2,14 +2,12 @@ package edu.bbu.webshop.feature.product
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.widget.CardView
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import edu.bbu.webshop.R
 import edu.bbu.webshop.WebShopApp
 import edu.bbu.webshop.api.Product
@@ -33,9 +31,6 @@ class ProductPageFragment : Fragment() {
 
     @Inject
     lateinit var productRepo : ProductRepository
-    val sum: Int = 0
-    val orderedProduct: MutableCollection<Product> = mutableListOf()
-    var cardview : CardView? = null
 
     val categoryID by lazy {
         arguments.getInt(ARG_CATEGORY_ID)
@@ -50,25 +45,17 @@ class ProductPageFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         val recyclerView : RecyclerView? = view?.findViewById<RecyclerView>(R.id.product_recycler_view)
         recyclerView?.addItemDecoration(DividerItemDecoration(view.context, LinearLayoutManager.VERTICAL))
-        cardview = view?.findViewById(R.id.check_out_card)
         productRepo.getProducts(object : ChangeListener<MutableCollection<Product>>{
             override fun onChange(var1: MutableCollection<Product>) {
                 recyclerView?.adapter = ProductListAdapter(
                         var1.filter { it.categoryId == categoryID }.toMutableList(),
                         object : ProductListAdapter.Callback{
                             override fun addProduct(product: Product) {
-                                cardview?.visibility = View.VISIBLE
-                                orderedProduct.add(product)
-                                updatePrice()
+                                (parentFragment as ProductsFragment).addProduct(product)
                             }
 
                             override fun removeProduct(product: Product) {
-                                orderedProduct.remove(product)
-                                if(orderedProduct.isEmpty()){
-                                    cardview?.visibility = View.GONE
-                                }else{
-                                    updatePrice()
-                                }
+                                (parentFragment as ProductsFragment).removeProduct(product)
                             }
                         })
             }
@@ -79,9 +66,5 @@ class ProductPageFragment : Fragment() {
         })
 
         super.onViewCreated(view, savedInstanceState)
-    }
-
-    fun updatePrice(){
-        view?.findViewById<TextView>(R.id.sum)?.text = "Summary: ${orderedProduct.sumByDouble { it.price }} $"
     }
 }

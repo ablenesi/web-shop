@@ -19,7 +19,7 @@ class AppModule(private val app:Application) {
 
     @Singleton @Provides
     fun provideWebShopService(sharePref: SharedPreferenceManager): WebShopService {
-        val ip: String = "192.168.1.122"
+        val ip: String = "192.168.43.190"
         val port: String = "80"
 
 
